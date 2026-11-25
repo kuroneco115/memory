@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101722">
+<title>Memory Core</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <button id="menuBtn" class="icon-btn" aria-label="メニュー">☰</button>
+  <div class="profile" title="Memory Core">MC</div>
+</header>
+<main>
+  <section class="search-home" id="homeView">
+    <div class="core-logo"><span class="orb large"></span><h1>Memory <span>Core</span></h1></div>
+    <p class="subtitle">あなたの思考を保存し、必要な時に見つける。</p>
+    <div class="searchbox"><span class="search-icon">⌕</span><input id="search" type="search" placeholder="記憶を検索" autocomplete="off"><button id="clearSearch" aria-label="検索をクリア">×</button></div>
+    <div class="quick-grid">
+      <button class="quick" data-category="アイデア"><span class="quick-icon">✦</span><span>アイデア</span></button>
+      <button class="quick" data-category="プロジェクト"><span class="quick-icon">▣</span><span>プロジェクト</span></button>
+      <button class="quick" data-category="決定事項"><span class="quick-icon">✓</span><span>決定事項</span></button>
+      <button class="quick" data-category="行動・タスク"><span class="quick-icon">☷</span><span>タスク</span></button>
+    </div>
+    <section class="summary-strip"><div><b id="totalCount">0</b><small>保存した記録</small></div><div><b id="confirmedCount">0</b><small>確定事項</small></div><div><b id="activeCount">0</b><small>検討中</small></div></section>
+    <section class="records-area"><div class="records-head"><h3 id="listHeading">最近の記録</h3><button id="newBtn" class="primary">＋ 記録する</button></div><div class="filter-row"><select id="categoryFilter"><option value="">カテゴリ：すべて</option><option>アイデア</option><option>プロジェクト</option><option>決定事項</option><option>行動・タスク</option><option>会話メモ</option><option>その他</option></select><select id="statusFilter"><option value="">状態：すべて</option><option>確定</option><option>検討中</option><option>保留</option><option>却下</option><option>未確認</option></select></div><section id="recordList" class="record-list"></section></section>
+  </section>
+  <section id="toolsView" class="tools-view hidden"><h2>ライブラリ</h2><p>記録のバックアップ・読み込み・書き出し</p><div class="library-actions"><button id="exportBtn" class="outline">JSONバックアップ</button><button id="importBtn" class="outline">JSONを読み込む</button><button id="markdownBtn" class="outline">Markdown出力</button><button id="clearBtn" class="danger-outline">全記録を削除</button><input id="fileInput" type="file" accept=".json,application/json" hidden></div><p class="note">データはこのブラウザ内に保存されます。端末やブラウザのデータ消去に備えて、定期的にバックアップしてください。</p></section>
+</main>
+<nav class="bottom-nav"><button class="nav-item active" data-view="home"><span>⌂</span><small>ホーム</small></button><button class="nav-item" data-view="search"><span>⌕</span><small>検索</small></button><button class="nav-item" data-view="record"><span>＋</span><small>記録</small></button><button class="nav-item" data-view="library"><span>▤</span><small>ライブラリ</small></button></nav>
+<dialog id="editor">
+  <form id="recordForm" method="dialog">
+    <div class="modal-head"><h2 id="formTitle">新しい記録</h2><button type="button" id="closeEditor" class="close">×</button></div>
+    <input type="hidden" id="recordId">
+    <label>タイトル<input id="title" required maxlength="120" placeholder="記録のタイトル"></label>
+    <div class="two">
+      <label>カテゴリ<select id="category"><option>アイデア</option><option>プロジェクト</option><option>決定事項</option><option>行動・タスク</option><option>会話メモ</option><option>その他</option></select></label>
+      <label>状態<select id="status"><option>検討中</option><option>確定</option><option>保留</option><option>却下</option><option>未確認</option></select></label>
+    </div>
+    <label>概要<textarea id="summary" rows="3" placeholder="内容を簡潔に"></textarea></label>
+    <label>詳細・経緯<textarea id="details" rows="5" placeholder="背景、話した内容、理由など"></textarea></label>
+    <label>決定事項<textarea id="decisions" rows="3" placeholder="決定した内容（未決なら空欄）"></textarea></label>
+    <label>保留・未確認事項<textarea id="pending" rows="3" placeholder="まだ決まっていないこと"></textarea></label>
+    <label>次の行動<textarea id="actions" rows="3" placeholder="次にやること"></textarea></label>
+    <label>タグ（カンマ区切り）<input id="tags" placeholder="起業, Webアプリ, アイデア"></label>
+    <p class="warning">確定事項は明確に合意した内容だけ記入。推測や提案は決定事項に入れないでください。</p>
+    <button class="primary full" type="submit">保存する</button>
+  </form>
+</dialog>
+<script src="app.js"></script>
+</body>
+</html>
